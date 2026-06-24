@@ -17,6 +17,28 @@ uv pip install -e .     # 或：pip install -e .
 
 这会注册 `selfu` 命令行脚本（同时保留 `python main.py` 可用）。
 
+### 打包、安装与发布（just + PyInstaller + GitHub Releases）
+
+仓库附带一个 [justfile](justfile)，其中三个配方分别封装了 PyInstaller 打包、
+本地安装和 GitHub release 发布。前置依赖：
+[`just`](https://github.com/casey/just)、
+[`uv`](https://github.com/astral-sh/uv) 和
+[`gh`](https://cli.github.com/)（需先 `gh auth login` 登录）。
+
+```bash
+just build                   # PyInstaller 打包 -> dist/selfu-<版本>-<系统>-<架构>{,.tar.gz}
+just install                 # 将二进制安装到 ~/.local/bin
+just install /usr/local/bin  # ... 或指定目录
+just release                 # 创建 GitHub release（标签 v<版本>）并上传 tar.gz
+just release v0.0.2            # 指定 release 标签
+just release v0.0.2 "说明"     # 指定标签与发布说明
+just all                     # 打包 -> 安装 -> 发布，一条龙
+```
+
+版本号、操作系统和架构会自动识别（`version` 从 `pyproject.toml` 读取），因此
+发布新版本前唯一要做的就是修改 `pyproject.toml` 里的 `version`，然后执行
+`just all`。
+
 ## 使用
 
 ```text

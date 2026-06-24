@@ -15,6 +15,28 @@ uv pip install -e .     # or: pip install -e .
 
 This registers the `selfu` console script (and keeps `python main.py` working).
 
+### Build, install & release (just + PyInstaller + GitHub Releases)
+
+A [justfile](justfile) ships three recipes that wrap PyInstaller packaging,
+local installation and GitHub release publishing. Prerequisites:
+[`just`](https://github.com/casey/just),
+[`uv`](https://github.com/astral-sh/uv) and
+[`gh`](https://cli.github.com/) (already `gh auth login`-ed).
+
+```bash
+just build                   # PyInstaller -> dist/selfu-<ver>-<os>-<arch>{,.tar.gz}
+just install                 # install the binary to ~/.local/bin
+just install /usr/local/bin  # ... or a custom directory
+just release                 # create GitHub release (tag v<ver>) + upload tar.gz
+just release v0.0.2            # custom release tag
+just release v0.0.2 "notes"    # custom tag + release notes
+just all                     # build -> install -> release, in one go
+```
+
+Version, OS and architecture are detected automatically (`version` is read
+from `pyproject.toml`), so the only step before publishing a new release is to
+bump `version` in `pyproject.toml` and run `just all`.
+
 ## Usage
 
 ```text
