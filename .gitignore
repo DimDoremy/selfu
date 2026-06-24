@@ -9,5 +9,15 @@ wheels/
 # Virtual environments
 .venv
 
+# Secrets / local env
+.env
+
 # self_docs
 __docs__
+
+# PyInstaller spec
+*.spec
+
+# Editor / local tooling
+.vtcode/
+vtcode.toml

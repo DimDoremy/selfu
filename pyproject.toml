@@ -1,6 +1,6 @@
 [project]
 name = "typer-selfu"
-version = "0.1.0"
+version = "0.0.1"
 description = "Selfu - a sysadmin self-check toolkit built with typer/rich/textual"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -9,6 +9,9 @@ dependencies = [
     "rich>=13.7.0",
     "textual>=0.60.0",
 ]
+
+license = "MIT"
+license-files = ["LICENSE"]
 
 [project.scripts]
 selfu = "selfu.cli:app"
